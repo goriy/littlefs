@@ -19,7 +19,9 @@ uint8_t Image[LFS_EMUFILE_TOTAL_SIZE];
 // Block device emulated on existing filesystem
 int lfs_emufile_create(const struct lfs_config *cfg, const char *path)
 {
-    FILE *o = fopen("data.img", "rb");
+    (void)cfg;
+    (void)path;
+    FILE *o = fopen("blocks", "rb");
     if (o)  {
       fread(Image, 1, sizeof(Image), o);
       fclose(o);
@@ -31,8 +33,8 @@ int lfs_emufile_create(const struct lfs_config *cfg, const char *path)
 }
 
 void lfs_emufile_destroy(const struct lfs_config *cfg) {
+    (void)cfg;
 }
-
 
 
 int lfs_emufile_read(const struct lfs_config *cfg, lfs_block_t block,
@@ -94,9 +96,9 @@ int lfs_emufile_erase(const struct lfs_config *cfg, lfs_block_t block) {
 }
 
 int lfs_emufile_sync(const struct lfs_config *cfg) {
-
+    (void)cfg;
     //fprintf(stderr, "sync:\n");
-    FILE *o = fopen("data.img", "wb");
+    FILE *o = fopen("blocks", "wb");
     if (o)  {
       fwrite(Image, 1, sizeof(Image), o);
       fclose(o);
