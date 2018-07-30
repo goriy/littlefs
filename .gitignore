@@ -2,6 +2,7 @@
 *.o
 *.d
 *.a
+*.exe
 
 # Testing things
 blocks/
