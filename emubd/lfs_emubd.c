@@ -40,7 +40,11 @@ int lfs_emubd_create(const struct lfs_config *cfg, const char *path) {
     memset(emu->child, '\0', LFS_NAME_MAX+1);
 
     // Create directory if it doesn't exist
+    #ifndef _WIN32
     int err = mkdir(path, 0777);
+    #else
+    int err = mkdir(path);
+    #endif
     if (err && errno != EEXIST) {
         return -errno;
     }

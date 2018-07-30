@@ -8,7 +8,11 @@
 
 // test stuff
 static void test_log(const char *s, uintmax_t v) {{
+    #ifdef _WIN32
+    printf("%s: %I64d\n", s, v);
+    #else
     printf("%s: %jd\n", s, v);
+    #endif
 }}
 
 static void test_assert(const char *file, unsigned line,
@@ -27,8 +31,13 @@ static void test_assert(const char *file, unsigned line,
     }}
 
     if (v != e) {{
+        #ifdef _WIN32
+        fprintf(stderr, "\033[31m%s:%u: assert %s failed with %I64d, "
+                "expected %I64d\033[0m\n", file, line, s, v, e);
+        #else
         fprintf(stderr, "\033[31m%s:%u: assert %s failed with %jd, "
                 "expected %jd\033[0m\n", file, line, s, v, e);
+        #endif
         exit(-2);
     }}
 }}
