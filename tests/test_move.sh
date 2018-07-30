@@ -59,54 +59,6 @@ tests/test.py << TEST
     lfs_rename(&lfs, "b/hello", "c/hello") => 0;
     lfs_unmount(&lfs) => 0;
 TEST
-rm -v blocks/7
-tests/test.py << TEST
-    lfs_mount(&lfs, &cfg) => 0;
-    lfs_dir_open(&lfs, &dir[0], "b") => 0;
-    lfs_dir_read(&lfs, &dir[0], &info) => 1;
-    strcmp(info.name, ".") => 0;
-    lfs_dir_read(&lfs, &dir[0], &info) => 1;
-    strcmp(info.name, "..") => 0;
-    lfs_dir_read(&lfs, &dir[0], &info) => 0;
-    lfs_dir_close(&lfs, &dir[0]) => 0;
-    lfs_dir_open(&lfs, &dir[0], "c") => 0;
-    lfs_dir_read(&lfs, &dir[0], &info) => 1;
-    strcmp(info.name, ".") => 0;
-    lfs_dir_read(&lfs, &dir[0], &info) => 1;
-    strcmp(info.name, "..") => 0;
-    lfs_dir_read(&lfs, &dir[0], &info) => 1;
-    strcmp(info.name, "hello") => 0;
-    lfs_dir_read(&lfs, &dir[0], &info) => 0;
-    lfs_unmount(&lfs) => 0;
-TEST
-
-echo "--- Move file corrupt source and dest ---"
-tests/test.py << TEST
-    lfs_mount(&lfs, &cfg) => 0;
-    lfs_rename(&lfs, "c/hello", "d/hello") => 0;
-    lfs_unmount(&lfs) => 0;
-TEST
-rm -v blocks/8
-rm -v blocks/a
-tests/test.py << TEST
-    lfs_mount(&lfs, &cfg) => 0;
-    lfs_dir_open(&lfs, &dir[0], "c") => 0;
-    lfs_dir_read(&lfs, &dir[0], &info) => 1;
-    strcmp(info.name, ".") => 0;
-    lfs_dir_read(&lfs, &dir[0], &info) => 1;
-    strcmp(info.name, "..") => 0;
-    lfs_dir_read(&lfs, &dir[0], &info) => 1;
-    strcmp(info.name, "hello") => 0;
-    lfs_dir_read(&lfs, &dir[0], &info) => 0;
-    lfs_dir_close(&lfs, &dir[0]) => 0;
-    lfs_dir_open(&lfs, &dir[0], "d") => 0;
-    lfs_dir_read(&lfs, &dir[0], &info) => 1;
-    strcmp(info.name, ".") => 0;
-    lfs_dir_read(&lfs, &dir[0], &info) => 1;
-    strcmp(info.name, "..") => 0;
-    lfs_dir_read(&lfs, &dir[0], &info) => 0;
-    lfs_unmount(&lfs) => 0;
-TEST
 
 echo "--- Move dir ---"
 tests/test.py << TEST
@@ -138,58 +90,6 @@ echo "--- Move dir corrupt source ---"
 tests/test.py << TEST
     lfs_mount(&lfs, &cfg) => 0;
     lfs_rename(&lfs, "b/hi", "c/hi") => 0;
-    lfs_unmount(&lfs) => 0;
-TEST
-rm -v blocks/7
-tests/test.py << TEST
-    lfs_mount(&lfs, &cfg) => 0;
-    lfs_dir_open(&lfs, &dir[0], "b") => 0;
-    lfs_dir_read(&lfs, &dir[0], &info) => 1;
-    strcmp(info.name, ".") => 0;
-    lfs_dir_read(&lfs, &dir[0], &info) => 1;
-    strcmp(info.name, "..") => 0;
-    lfs_dir_read(&lfs, &dir[0], &info) => 0;
-    lfs_dir_close(&lfs, &dir[0]) => 0;
-    lfs_dir_open(&lfs, &dir[0], "c") => 0;
-    lfs_dir_read(&lfs, &dir[0], &info) => 1;
-    strcmp(info.name, ".") => 0;
-    lfs_dir_read(&lfs, &dir[0], &info) => 1;
-    strcmp(info.name, "..") => 0;
-    lfs_dir_read(&lfs, &dir[0], &info) => 1;
-    strcmp(info.name, "hello") => 0;
-    lfs_dir_read(&lfs, &dir[0], &info) => 1;
-    strcmp(info.name, "hi") => 0;
-    lfs_dir_read(&lfs, &dir[0], &info) => 0;
-    lfs_unmount(&lfs) => 0;
-TEST
-
-echo "--- Move dir corrupt source and dest ---"
-tests/test.py << TEST
-    lfs_mount(&lfs, &cfg) => 0;
-    lfs_rename(&lfs, "c/hi", "d/hi") => 0;
-    lfs_unmount(&lfs) => 0;
-TEST
-rm -v blocks/9
-rm -v blocks/a
-tests/test.py << TEST
-    lfs_mount(&lfs, &cfg) => 0;
-    lfs_dir_open(&lfs, &dir[0], "c") => 0;
-    lfs_dir_read(&lfs, &dir[0], &info) => 1;
-    strcmp(info.name, ".") => 0;
-    lfs_dir_read(&lfs, &dir[0], &info) => 1;
-    strcmp(info.name, "..") => 0;
-    lfs_dir_read(&lfs, &dir[0], &info) => 1;
-    strcmp(info.name, "hello") => 0;
-    lfs_dir_read(&lfs, &dir[0], &info) => 1;
-    strcmp(info.name, "hi") => 0;
-    lfs_dir_read(&lfs, &dir[0], &info) => 0;
-    lfs_dir_close(&lfs, &dir[0]) => 0;
-    lfs_dir_open(&lfs, &dir[0], "d") => 0;
-    lfs_dir_read(&lfs, &dir[0], &info) => 1;
-    strcmp(info.name, ".") => 0;
-    lfs_dir_read(&lfs, &dir[0], &info) => 1;
-    strcmp(info.name, "..") => 0;
-    lfs_dir_read(&lfs, &dir[0], &info) => 0;
     lfs_unmount(&lfs) => 0;
 TEST
 

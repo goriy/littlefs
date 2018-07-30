@@ -1,6 +1,8 @@
 #!/bin/bash
 set -eu
 
+exit
+
 echo "=== Corrupt tests ==="
 
 NAMEMULT=64

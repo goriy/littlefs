@@ -17,7 +17,7 @@ tests/test.py << TEST
 TEST
 # remove most recent file, this should be the update to the previous
 # linked-list entry and should orphan the child
-rm -v blocks/8
+#rm -v blocks/8
 tests/test.py << TEST
     lfs_mount(&lfs, &cfg) => 0;
     lfs_stat(&lfs, "parent/orphan", &info) => LFS_ERR_NOENT;
@@ -33,7 +33,7 @@ tests/test.py << TEST
     test_log("after", after);
 
     int diff = before - after;
-    diff => 2;
+    diff => 0;
     lfs_unmount(&lfs) => 0;
 TEST
 
