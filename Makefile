@@ -25,7 +25,7 @@ ifdef WORD
 override CFLAGS += -m$(WORD)
 endif
 override CFLAGS += -I.
-override CFLAGS += -std=c99 -Wall -pedantic -Wshadow -Wunused-parameter
+override CFLAGS += -std=c99 -Wall -pedantic -Wshadow -Wunused-parameter -Wno-format
 
 
 all: $(TARGET)
