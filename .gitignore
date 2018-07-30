@@ -5,6 +5,7 @@
 *.exe
 
 # Testing things
+blocks
 blocks/
 lfs
 test.c

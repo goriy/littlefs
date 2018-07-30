@@ -7,7 +7,7 @@ CC ?= gcc
 AR ?= ar
 SIZE ?= size
 
-SRC += $(wildcard *.c emubd/*.c)
+SRC += $(wildcard *.c emufile/*.c)
 OBJ := $(SRC:.c=.o)
 DEP := $(SRC:.c=.d)
 ASM := $(SRC:.c=.s)
